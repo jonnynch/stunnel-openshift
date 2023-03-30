@@ -1,9 +1,17 @@
+# Sample stunnel configuration file for securing MySQL (server side)
 foreground = yes
-pid = 
-sslVersion = TLSv1.2
 
-[service]
-accept = 33306
-connect = 3306
+# Provide the full path to your certificate-key pair file
 cert = /etc/stunnel/pki/cert.pem
 key = /etc/stunnel/pki/key.pem
+
+
+# change the UID and GID of the process for security reasons
+setuid = nobody
+setgid = nobody
+
+# Configure our secured MySQL server
+
+[mysqls]
+accept  = 33306
+connect = /run/mysqld/mysqld.sock
