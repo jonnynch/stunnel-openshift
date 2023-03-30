@@ -40,14 +40,14 @@ foreground = yes
 pid = 
 
 [service]
-accept=5002
-connect=stunnel-demo.rhel-cdk.10.1.2.2.xip.io:443
+accept=3306
+connect=stunnel-maria-db.itzroks-661002xi02-u7k56k-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud:443
 verify=0
 ```
 
 This configuration tells stunnel to act as a client, to listen locally on port 
-`5002`, to forward all traffic received on that port to 
-`stunnel-demo.rhel-cdk.10.1.2.2.xip.io:443` (replace with your stunnel route), 
+`3306`, to forward all traffic received on that port to 
+`stunnel-maria-db.itzroks-661002xi02-u7k56k-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud:443` (replace with your stunnel route), 
 and for this demo turns off validation of the server's cert since we are 
 generating a self-signed cert for this example. In a real-world scenario you 
 would want to use a trusted cert and set verify to a non-zero value.

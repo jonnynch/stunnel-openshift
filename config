@@ -3,7 +3,7 @@ pid =
 sslVersion = TLSv1.2
 
 [service]
-accept = 5000
-connect = 5001
+accept = 33306
+connect = 3306
 cert = /etc/stunnel/pki/cert.pem
 key = /etc/stunnel/pki/key.pem
