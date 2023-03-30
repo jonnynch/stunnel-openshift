@@ -7,8 +7,8 @@ key = /etc/stunnel/pki/key.pem
 
 
 # change the UID and GID of the process for security reasons
-setuid = nobody
-setgid = nobody
+# setuid = nobody
+# setgid = nobody
 
 # Configure our secured MySQL server
 
