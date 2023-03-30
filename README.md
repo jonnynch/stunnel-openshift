@@ -59,10 +59,12 @@ connect to port 5002 on the host running the stunnel client, and stunnel will
 encrypt and forward all traffic into OpenShift.
 
 We can now try it out. You'll need to have either telnet or socat installed. 
-With mysql, run `mysql -u=user -p=pass testdb`. With socat, run 
-`socat - TCP:localhost:5002`. Either way, you are now connected to our echo 
-server in OpenShift via an encrypted tunnel. Type any message and press enter
-to have the message echoed back to you.
+With mysql, run `mysql -uuser -ppass testdb -hmysql.localdev.me`. You are now connected to our mysql 
+server in OpenShift via an encrypted tunnel. Type any sql and press enter
+to have the result back to you.
+```
+select 1;
+```
 
 Key takeaways:
 
