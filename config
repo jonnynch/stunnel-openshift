@@ -14,4 +14,4 @@ key = /etc/stunnel/pki/key.pem
 
 [mysqls]
 accept  = 33306
-connect = /run/mysqld/mysqld.sock
+connect = 3306
