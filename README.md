@@ -1,4 +1,4 @@
-stunnel-openshift
+# stunnel-openshift
 =================
 
 This repository includes everything needed to build a stunnel Docker container 
@@ -23,9 +23,11 @@ To start up the demo, download the template, then run the following from the
 command line (with a logged in `oc` client and in a project of your choice):
 
 ```
-oc process -f stunnel-example.yml | oc create -f -
-echo "After deployment, the stunnel example will be available at `oc get route stunnel --template '{{.spec.host}}'`:443"
+oc new-project mysql
+oc process -f mysql-stunnel.yml | oc create -f -
+echo "After deployment, the stunnel endpoint will be available at `oc get route stunnel --template '{{.spec.host}}'`:443"
 ```
+
 
 The template sets up the server side of stunnel, but to talk to it we will 
 needed a local client as well. Install stunnel locally (check your package 
@@ -41,18 +43,18 @@ pid =
 
 [service]
 accept=3306
-connect=stunnel-maria-db.itzroks-661002xi02-u7k56k-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud:443
+connect=<route you got above>:443
 verify=0
 ```
 
 This configuration tells stunnel to act as a client, to listen locally on port 
 `3306`, to forward all traffic received on that port to 
-`stunnel-maria-db.itzroks-661002xi02-u7k56k-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud:443` (replace with your stunnel route), 
+`<route you got above>:443` (replace with your stunnel route), 
 and for this demo turns off validation of the server's cert since we are 
 generating a self-signed cert for this example. In a real-world scenario you 
 would want to use a trusted cert and set verify to a non-zero value.
 
-You can now start stunnel: `stunnel stunnel-client.conf`
+You can now start stunnel: `stunnel stunnel-client.conf &`
 
 Now anyone who wants to connect to our TCP service in OpenShift can instead 
 connect to port 5002 on the host running the stunnel client, and stunnel will
@@ -64,6 +66,7 @@ server in OpenShift via an encrypted tunnel. Type any sql and press enter
 to have the result back to you.
 ```
 select 1;
+show databases;
 ```
 
 Key takeaways:
@@ -84,3 +87,36 @@ behavior:
 * Mount a secret that contains two files/keys: "cert.pem" should have the 
   certificate chain to present to the client, and "key.pem" the key used to
   sign the certificate.
+
+# Node Port
+Instead of using stunnel, we can also use NodePort
+
+you can delete all resources under the namespace
+```
+oc delete all --all -n mysql
+```
+
+Apply the node port resouces
+```
+oc process -f mysql-nodeport.yml | oc create -f -
+```
+Node Port will be `30000` as defined
+
+You can check the node's external ip via
+```
+oc get node -o wide
+```
+
+Any of the node ip can be used.
+
+Debug Node listening port
+```
+oc debug node/<node ip>
+netstat -lptn
+```
+
+
+Try to connect using mysql
+```
+mysql -uuser -ppass testdb  -P30001 -h<node ip>
+```
