@@ -43,13 +43,13 @@ pid =
 
 [service]
 accept=3306
-connect=<route you got above>:443
+connect=<route url>:443
 verify=0
 ```
 
 This configuration tells stunnel to act as a client, to listen locally on port 
 `3306`, to forward all traffic received on that port to 
-`<route you got above>:443` (replace with your stunnel route), 
+`<route url>:443` (replace with your stunnel route), 
 and for this demo turns off validation of the server's cert since we are 
 generating a self-signed cert for this example. In a real-world scenario you 
 would want to use a trusted cert and set verify to a non-zero value.
@@ -100,7 +100,7 @@ Apply the node port resouces
 ```
 oc process -f mysql-nodeport.yml | oc create -f -
 ```
-Node Port will be `30000` as defined
+Node Port will be `30001` as defined
 
 You can check the node's external ip via
 ```
