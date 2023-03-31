@@ -91,7 +91,12 @@ behavior:
 # Node Port
 Instead of using stunnel, we can also use NodePort
 
-you can delete all resources under the namespace
+Create new project
+```
+oc new-project mysql-nodeport
+```
+
+or, you can delete all resources under the namespace
 ```
 oc delete all --all -n mysql
 ```
