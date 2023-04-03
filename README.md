@@ -67,6 +67,7 @@ to have the result back to you.
 ```
 select 1;
 show databases;
+select @@hostname;
 ```
 
 Key takeaways:
@@ -128,8 +129,12 @@ mysql -uuser -ppass testdb  -P30001 -h<node ip>
 
 # RHACM 
 ```
-oc apply -k subscriptions/channel
-oc apply -k subscriptions/mysql
+oc apply -k subscription/channel
+oc apply -k subscription/mysql
+```
+
+## grant image puller to subscription namespace to access the image from builder we created in mysql namespace
+```
 oc config use-context hub
 oc policy add-role-to-user \
     system:image-puller system:serviceaccount:mysql-subscription:default \
