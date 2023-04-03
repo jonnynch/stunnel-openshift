@@ -33,4 +33,4 @@ spec:
         name: stunnel
         ports: [{containerPort: 33306, protocol: TCP}]
         readinessProbe: {failureThreshold: 3, initialDelaySeconds: 1, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 33306}, timeoutSeconds: 1}
-        image: stunnel:latest
+        image: image-registry.openshift-image-registry.svc:5000/mysql-subscription/stunnel:latest

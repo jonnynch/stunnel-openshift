@@ -125,3 +125,9 @@ Try to connect using mysql
 ```
 mysql -uuser -ppass testdb  -P30001 -h<node ip>
 ```
+
+# RHACM 
+```
+oc apply -k subscriptions/channel
+oc apply -k subscriptions/mysql
+```
