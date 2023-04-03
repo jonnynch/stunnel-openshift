@@ -1,6 +1,8 @@
 apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
+  labels:
+    app: mysql-stunnel
   name: centos
 spec:
   tags:
@@ -13,6 +15,8 @@ spec:
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
+  labels:
+    app: mysql-stunnel
   name: stunnel
 spec:
   output:
@@ -38,6 +42,8 @@ spec:
 apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
+  labels:
+    app: mysql-stunnel
   name: stunnel
 spec:
   tags:
