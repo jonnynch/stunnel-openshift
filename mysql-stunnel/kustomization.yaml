@@ -1,5 +1,4 @@
 resources:
-- stunnel-image-build.yaml
 - service.yaml
 - deployment.yaml
 - route.yaml
