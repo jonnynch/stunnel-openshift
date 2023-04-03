@@ -20,7 +20,7 @@ kind: Subscription
 metadata:
   name: mysql-production-subscription
   labels:
-    app: mysql-sample
+    app: mysql-stunnel
   annotations:
     apps.open-cluster-management.io/github-path: mysql-stunnel
     apps.open-cluster-management.io/github-branch: production

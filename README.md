@@ -130,4 +130,12 @@ mysql -uuser -ppass testdb  -P30001 -h<node ip>
 ```
 oc apply -k subscriptions/channel
 oc apply -k subscriptions/mysql
+oc config use-context hub
+oc policy add-role-to-user \
+    system:image-puller system:serviceaccount:mysql-subscription:default \
+    --namespace=mysql
+oc config use-context spoke1
+oc policy add-role-to-user \
+    system:image-puller system:serviceaccount:mysql-subscription:default \
+    --namespace=mysql
 ```
