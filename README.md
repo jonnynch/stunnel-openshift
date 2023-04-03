@@ -25,7 +25,7 @@ command line (with a logged in `oc` client and in a project of your choice):
 ```
 oc new-project mysql
 oc process -f mysql-stunnel.yml | oc create -f -
-echo "After deployment, the stunnel endpoint will be available at `oc get route stunnel --template '{{.spec.host}}'`:443"
+echo "After deployment, the stunnel endpoint will be available at `oc get route mysql-stunnel --template '{{.spec.host}}'`:443"
 ```
 
 

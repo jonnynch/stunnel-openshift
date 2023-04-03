@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  labels:
+    app: mysql-stunnel
+  name: mysql-stunnel
+spec:
+  to:
+    kind: Service
+    name: mysql-stunnel
+    weight: 100
+  port:
+    targetPort: 33306-tcp
+  tls:
+    termination: passthrough
+
+

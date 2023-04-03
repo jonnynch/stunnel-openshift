@@ -1,0 +1,32 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: mysql-development-subscription
+  labels:
+    app: mysql-stunnel
+  annotations:
+    apps.open-cluster-management.io/github-path: mysql-stunnel
+    apps.open-cluster-management.io/github-branch: master
+spec:
+  channel: github-channel/gitops
+  placement:
+    placementRef:
+      name: mysql-development
+      kind: PlacementRule
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  name: mysql-production-subscription
+  labels:
+    app: mysql-sample
+  annotations:
+    apps.open-cluster-management.io/github-path: mysql-stunnel
+    apps.open-cluster-management.io/github-branch: production
+spec:
+  channel: github-channel/gitops
+  placement:
+    placementRef:
+      name: mysql-production
+      kind: PlacementRule

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-stunnel
+  labels:
+    app: mysql-stunnel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-stunnel
+  template:
+    metadata:
+      labels:
+        app: mysql-stunnel
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: testdb
+        - name: MYSQL_PASSWORD
+          value: pass
+        - name: MYSQL_USER
+          value: user
+        image: image-registry.openshift-image-registry.svc:5000/openshift/mysql:8.0-el8
+        name: mysql
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        resources: {}
+      - imagePullPolicy: Always
+        livenessProbe: {failureThreshold: 3, initialDelaySeconds: 1, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 33306}, timeoutSeconds: 1}
+        name: stunnel
+        ports: [{containerPort: 33306, protocol: TCP}]
+        readinessProbe: {failureThreshold: 3, initialDelaySeconds: 1, periodSeconds: 10, successThreshold: 1, tcpSocket: {port: 33306}, timeoutSeconds: 1}

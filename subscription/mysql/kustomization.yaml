@@ -1,0 +1,6 @@
+namespace: mysql-subscription
+resources:
+- namespace.yaml
+- placementrule.yaml
+- subscription.yaml
+- application.yaml

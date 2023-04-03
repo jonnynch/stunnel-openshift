@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-stunnel
+spec:
+  selector:
+    app: mysql-stunnel
+  ports:
+    - name: 33306-tcp
+      port: 33306
+      protocol: TCP
+      targetPort: 33306
