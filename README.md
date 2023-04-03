@@ -133,7 +133,10 @@ oc apply -k subscription/channel
 oc apply -k subscription/mysql
 ```
 
-## grant image puller to subscription namespace to access the image from builder we created in mysql namespace
+## if using centralize image build
+1. update deployment.yaml and change the image path from /mysql-subscription/ to /mysql/
+2. grant image puller to subscription namespace to access the image from builder we created in mysql namespace
+
 ```
 oc config use-context hub
 oc policy add-role-to-user \
